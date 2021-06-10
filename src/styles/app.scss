@@ -21,6 +21,7 @@ body {
   font-weight: normal;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
   Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  color: rgba(0,0,0,0.7);
   padding-top: var(--header-height);
 }
 
@@ -32,6 +33,7 @@ a {
 button {
   background-color: transparent;
   cursor: pointer;
+  font-size: 1rem;
 }
 
 img {
@@ -48,5 +50,5 @@ h6,
 b,
 strong,
 label {
-  font-weight: 600;
+  font-weight: normal;
 }
