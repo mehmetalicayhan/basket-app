@@ -4,16 +4,35 @@
     <div class="self-center">{{product.name}}</div>
     <div class="item-footer">
       <div class="item-price">{{product.price}}TRY</div>
-      <button>Add to Basket</button>
+      <button @click="addToBasket">Add to Basket</button>
     </div>
   </div>
 </template>
 
 <script>
+import { mapActions, mapState } from 'vuex';
+
 export default {
   name: 'ListItem',
   props: {
     product: Object,
+  },
+  computed: {
+    ...mapState([
+      'orderItems',
+    ]),
+  },
+
+  methods: {
+    ...mapActions([
+      'addItem',
+    ]),
+
+    addToBasket() {
+      this.product.quantity = 0;
+      this.addItem(this.product);
+      this.$router.push({ name: 'Order' });
+    },
   },
 };
 </script>
