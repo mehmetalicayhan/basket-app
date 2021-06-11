@@ -1,5 +1,13 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
+  <div>
+    <order-list/>
   </div>
 </template>
+
+<script>
+import OrderList from '@/components/OrderList.vue';
+
+export default {
+  components: { OrderList },
+};
+</script>

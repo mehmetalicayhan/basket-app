@@ -29,7 +29,7 @@ export default {
     ]),
 
     addToBasket() {
-      this.product.quantity = 0;
+      this.product.quantity = 1;
       this.addItem(this.product);
       this.$router.push({ name: 'Order' });
     },
