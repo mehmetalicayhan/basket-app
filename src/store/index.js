@@ -6,27 +6,38 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     orderItems: [],
+    totalPrice: 0,
   },
   getters: {
     getOrderItems(state) {
       return state.orderItems;
     },
+    getOrderCount(state) {
+      return state.orderItems.length;
+    },
+    getTotalPrice(state) {
+      let total = 0;
+      state.orderItems.forEach(((item) => {
+        total += (parseFloat(item.price) * item.quantity);
+      }));
+      return total;
+    },
   },
   mutations: {
     ADD_ITEM_TO_CART(state, payload) {
       const isExist = state.orderItems.find((item) => item.id === payload.id);
+      console.log(isExist);
       if (!isExist) state.orderItems.push(payload);
     },
     REMOVE_ITEM_FROM_CART(state, id) {
-      state.orderItems.filter((item) => item.id !== id);
+      state.orderItems = state.orderItems.filter((item) => item.id !== id);
     },
-    INCREMENT_ITEM_QUANTITY(state, id) {
-      const currentItem = state.orderItems.find((item) => item.id === id);
-      currentItem.quantity += 1;
-    },
-    DECREMENT_ITEM_QUANTITY(state, id) {
-      const currentItem = state.orderItems.find((item) => item.id === id);
-      currentItem.quantity -= 1;
+
+    UPDATE_ITEM(state, item) {
+      const index = state.orderItems.findIndex((element) => element.id === item.id);
+      if (index !== -1) {
+        state.orderItems.splice(index, 1, item);
+      }
     },
   },
   actions: {
@@ -36,7 +47,9 @@ export default new Vuex.Store({
     removeItem({ commit }, itemId) {
       commit('REMOVE_ITEM_FROM_CART', itemId);
     },
+    updateItem({ commit }, item) {
+      commit('UPDATE_ITEM', item);
+    },
   },
-  modules: {
-  },
+  modules: {},
 });
