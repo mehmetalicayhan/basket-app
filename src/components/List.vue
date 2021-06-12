@@ -1,5 +1,8 @@
 <template>
   <div class="list-container">
+    <div v-if="!isLoading">
+      Loading
+    </div>
     <div class="list-items" v-for="(product,index) in products" :key="index">
       <list-item :product="product"/>
     </div>
@@ -7,6 +10,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 import ListItem from './ListItem.vue';
 
 export default {
@@ -14,6 +18,7 @@ export default {
   data() {
     return {
       products: [],
+      isLoading: false,
     };
   },
   components: {
@@ -21,8 +26,9 @@ export default {
   },
 
   created() {
-    fetch('https://nonchalant-fang.glitch.me/listing').then((res) => res.json()).then((res) => {
-      this.products = res;
+    axios.get('https://nonchalant-fang.glitch.me/listing').then((res) => {
+      this.products = res.data;
+      this.isLoading = true;
     });
   },
 };

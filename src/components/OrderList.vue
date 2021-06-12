@@ -7,23 +7,33 @@
     </div>
     <div class="button-container">
       <button @click="goBack" class="order-button">Continue to Shopping</button>
-      <button :disabled="getOrderCount===0" class="order-button colored">Place Order</button>
-      <div>Total Price : {{getTotalPrice}} TRY</div>
+      <button :disabled="getOrderCount===0"
+              class="order-button colored"
+              @click.prevent="placeOrder"
+      >Place Order
+      </button>
+      <div>Total Price : {{ getTotalPrice }} TRY</div>
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapState } from 'vuex';
 import OrderItem from '@/components/OrderItem.vue';
+import axios from 'axios';
 
 export default {
   name: 'OrderList',
   components: { OrderItem },
   data() {
-    return { orderItems: [] };
+    return {
+      isError: false,
+      isSuccess: false,
+      error: {},
+    };
   },
   computed: {
+    ...mapState(['orderItems']),
     ...mapGetters([
       'getOrderItems',
       'getOrderCount',
@@ -34,6 +44,24 @@ export default {
   methods: {
     goBack() {
       this.$router.push({ name: 'Listing' });
+    },
+    placeOrder() {
+      const orderArray = this.orderItems.map((item) => ({
+        id: item.id,
+        amount: item.quantity,
+      }));
+      axios.post('https://nonchalant-fang.glitch.me/order', orderArray)
+        .then(() => {
+          this.isSuccess = true;
+          this.$router.push({ name: 'Listing' });
+          // clear order Items from states
+        })
+        .catch((err) => {
+          if (err.response) {
+            this.error = err.response.data;
+          }
+          this.isError = true;
+        });
     },
   },
 
@@ -62,10 +90,10 @@ export default {
     border: 1px solid rgba($borderColor, 0.3);
     border-top: none;
     box-shadow: 0 -5px 5px -5px $borderColor;
-    position: fixed;
-    bottom: 0;
+    //position: fixed;
+    //bottom: 0;
     background-color: #fff;
-    width: 840px;;
+    //width: 100%;;
 
     .order-button {
       border: 1px solid rgba($borderColor, 0.8);

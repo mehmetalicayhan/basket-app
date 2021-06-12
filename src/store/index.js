@@ -6,7 +6,6 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     orderItems: [],
-    totalPrice: 0,
   },
   getters: {
     getOrderItems(state) {
@@ -39,6 +38,7 @@ export default new Vuex.Store({
         state.orderItems.splice(index, 1, item);
       }
     },
+
   },
   actions: {
     addItem({ commit }, cartItem) {
