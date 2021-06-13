@@ -6,7 +6,7 @@
 
 <style lang="scss">
 #app {
-  max-width: 840px;
+  max-width: $maxWidth;
   margin-right: auto;
   margin-left: auto;
 }
