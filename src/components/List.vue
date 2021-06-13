@@ -1,18 +1,19 @@
 <template>
   <div class="list-container">
     <template v-if="!isLoading">
-      <div class="list-items" v-for="index in 6" :key="index">
-        <list-item :is-loading="isLoading"/>
+      <div v-for="index in 6" :key="index">
+        <loading-skeleton/>
       </div>
     </template>
-    <div class="list-items" v-for="(product,index) in products" :key="index">
-      <list-item :is-loading="isLoading" :product="product"/>
+    <div v-for="(product,index) in products" :key="index">
+      <list-item :product="product"/>
     </div>
   </div>
 </template>
 
 <script>
 import axios from 'axios';
+import LoadingSkeleton from '@/components/LoadingSkeleton.vue';
 import ListItem from './ListItem.vue';
 
 export default {
@@ -24,6 +25,7 @@ export default {
     };
   },
   components: {
+    LoadingSkeleton,
     ListItem,
   },
 

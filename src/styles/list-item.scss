@@ -1,0 +1,38 @@
+.item-container {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 10px;
+  justify-content: center;
+  border-right: 1px solid rgba($borderColor, 0.3);
+  border-bottom: 1px solid rgba($borderColor, 0.3);
+
+  div {
+    margin-top: 15px;
+  }
+
+  .self-center {
+    align-self: center;
+  }
+
+}
+.item-footer {
+  display: flex;
+  justify-content: space-between;
+
+  .item-price {
+    font-weight: bold;
+  }
+
+  button {
+    text-align: center;
+    background-color: #ea6e35;
+    padding: 10px;
+    border-radius: 3px;
+    color: #fff;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
+}
