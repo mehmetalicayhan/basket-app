@@ -21,11 +21,11 @@ export default new Vuex.Store({
       }));
       return total.toFixed(2);
     },
+
   },
   mutations: {
     ADD_ITEM_TO_CART(state, payload) {
       const isExist = state.orderItems.find((item) => item.id === payload.id);
-      console.log(isExist);
       if (!isExist) state.orderItems.push(payload);
     },
     REMOVE_ITEM_FROM_CART(state, id) {
@@ -41,7 +41,6 @@ export default new Vuex.Store({
     REMOVE_ALL_FROM_CART(state) {
       state.orderItems = [];
     },
-
   },
   actions: {
     addItem({ commit }, cartItem) {

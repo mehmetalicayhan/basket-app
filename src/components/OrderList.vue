@@ -108,7 +108,7 @@ export default {
     font-weight: bold;
     position: fixed;
     top: 0;
-    width: 840px;
+    width: $maxWidth;
     background-color: #fff;
   }
 

@@ -4,13 +4,27 @@
     <div class="self-center">{{ product.name }}</div>
     <div class="item-footer">
       <div class="item-price">{{ product.price }}TRY</div>
-      <button @click="addToBasket">Add to Basket</button>
+      <button
+        v-if="!orderItems.find((item) => item.id === this.product.id)"
+        @click="addToBasket">
+        <IconAddCart class="icon"/>
+        Add To Basket
+      </button>
+      <button
+        v-else
+        :disabled="true"
+      >
+        <IconOnCart class="icon"/>
+        On Basket
+      </button>
     </div>
   </div>
 </template>
 
 <script>
 import { mapActions, mapState } from 'vuex';
+import IconAddCart from '@/icons/add-to-cart.svg';
+import IconOnCart from '@/icons/on-cart.svg';
 
 export default {
   name: 'ListItem',
@@ -22,6 +36,10 @@ export default {
     ...mapState([
       'orderItems',
     ]),
+  },
+  components: {
+    IconAddCart,
+    IconOnCart,
   },
 
   methods: {

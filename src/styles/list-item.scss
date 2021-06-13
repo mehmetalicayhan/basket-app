@@ -1,10 +1,10 @@
 .item-container {
   display: flex;
   flex-direction: column;
-  padding: 10px 10px;
+  padding: 20px 20px;
   justify-content: center;
-  border-right: 1px solid rgba($borderColor, 0.3);
-  border-bottom: 1px solid rgba($borderColor, 0.3);
+  //border-right: 1px solid rgba($borderColor, 0.3);
+  //border-bottom: 1px solid rgba($borderColor, 0.3);
 
   div {
     margin-top: 15px;
@@ -29,9 +29,21 @@
     padding: 10px;
     border-radius: 3px;
     color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
 
+    .icon{
+      width: 15px;
+      height: 15px;
+      margin-right:4px;
+    }
     &:hover {
       opacity: 0.8;
+    }
+    &:disabled {
+      opacity: 0.5;
     }
   }
 
