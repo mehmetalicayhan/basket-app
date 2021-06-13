@@ -12,10 +12,9 @@
       <div class="self-center">
         <div class="image__skeleton bg-animation"></div>
       </div>
-
-      <div class="self-center name__skeleton  bg-animation"></div>
+      <div class="self-center name__skeleton bg-animation"></div>
       <div class="item-footer">
-        <div class="item-price price__skeleton  bg-animation"></div>
+        <div class="item-price price__skeleton bg-animation"></div>
         <div class="button__skeleton  bg-animation"></div>
       </div>
     </template>

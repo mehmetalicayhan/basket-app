@@ -19,7 +19,7 @@ export default new Vuex.Store({
       state.orderItems.forEach(((item) => {
         total += (parseFloat(item.price) * item.quantity);
       }));
-      return total;
+      return total.toFixed(2);
     },
   },
   mutations: {
@@ -38,6 +38,9 @@ export default new Vuex.Store({
         state.orderItems.splice(index, 1, item);
       }
     },
+    REMOVE_ALL_FROM_CART(state) {
+      state.orderItems = [];
+    },
 
   },
   actions: {
@@ -49,6 +52,9 @@ export default new Vuex.Store({
     },
     updateItem({ commit }, item) {
       commit('UPDATE_ITEM', item);
+    },
+    removeAllItems({ commit }) {
+      commit('REMOVE_ALL_FROM_CART');
     },
   },
   modules: {},

@@ -8,7 +8,7 @@
             :disabled="orderItem.quantity === 1"
             @click="decrementItemQuantity" class="decrement">-
           </button>
-            <input type="number" v-model="orderItem.quantity"/>
+          <input type="number" v-model="orderItem.quantity"/>
           <button @click="incrementItemQuantity" class="increment">+</button>
         </div>
       </div>
