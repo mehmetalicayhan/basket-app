@@ -47,7 +47,7 @@ export default {
   //border-left: 1px solid rgba(204, 204, 204, 0.3);
   margin-top: 50px;
   //border: 1px solid rgba($borderColor,0.3);
-  @media (min-width: 480px) {
+  @media (min-width: $tablet) {
     grid-template-columns: 1fr 1fr;
 
   }
@@ -57,7 +57,7 @@ export default {
     box-shadow: 0 4px 8px 0 rgba($borderColor, 0.2), 0 6px 20px 0 rgba($borderColor, 0.19);
 
   }
-  @media (min-width: 768px) {
+  @media (min-width: $desktop) {
     grid-template-columns: 1fr 1fr 1fr;
 
   }

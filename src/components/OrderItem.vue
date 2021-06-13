@@ -14,8 +14,14 @@
       </div>
       <div class="order-item-right-side">
         <p class="order-item-name">{{ orderItem.name }}</p>
-        <p class="order-item-price">{{ orderItem.price }} TRY</p>
-        <button @click="removeFromBasket" class="self-center">Remove</button>
+        <p class="order-item-price">{{
+            parseFloat(orderItem.price*orderItem.quantity)
+              .toFixed(2)
+          }} TRY</p>
+        <button @click="removeFromBasket"
+                class="self-end remove-item-button">
+          <IconRemoveFromCart class="icon-md"/>
+        </button>
       </div>
     </div>
   </div>
@@ -23,6 +29,7 @@
 
 <script>
 import { mapActions } from 'vuex';
+import IconRemoveFromCart from '@/icons/remove-from-cart.svg';
 
 export default {
   name: 'OrderItem',
@@ -31,6 +38,9 @@ export default {
       type: Object,
       required: true,
     },
+  },
+  components: {
+    IconRemoveFromCart,
   },
   methods: {
     ...mapActions([
@@ -160,8 +170,19 @@ export default {
         font-weight: bold;
       }
 
-      .self-center {
-        align-self: center;
+      .remove-item-button {
+        border: 1px solid $removeRed;
+        border-radius: 4px;
+        padding: 8px;
+        color: $removeRed;
+        &:hover{
+          background-color: $removeRed;
+          color: #fff;
+        }
+      }
+
+      .self-end {
+        align-self: flex-end;
       }
 
     }

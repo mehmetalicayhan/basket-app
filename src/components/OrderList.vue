@@ -6,24 +6,29 @@
       <order-item :order-item="item"/>
     </div>
     <div class="button-container">
-      <button @click="goBack" class="order-button">Continue to Shopping</button>
+      <button @click="goBack" class="order-button">
+        <IconLeftArrow class="icon-sm"/>
+        <div class="mobile-none">Continue to Shopping</div>
+      </button>
       <button :disabled="getOrderCount===0"
               class="order-button colored"
               @click.prevent="placeOrder"
-      >Place Order
+      >
+        <IconCheckout class="icon-sm"/>
+        <div class="mobile-none">Place Order</div>
       </button>
       <div>Total Price : {{ getTotalPrice }} TRY</div>
     </div>
     <modal v-if="showModal" @close="showModal = false">
       <div v-if="isError" class="modal-item-container" slot="header">
-        <IconError class="icon"/>
-        <div> Error </div>
+        <IconError class="icon-bg"/>
+        <div> Error</div>
       </div>
-      <div v-if="isError"  slot="body">
-        <div> {{ error.message }} </div>
+      <div v-if="isError" slot="body">
+        <div> {{ error.message }}</div>
       </div>
       <div v-if="isSuccess" class="modal-item-container" slot="header">
-        <IconSuccess class="icon"/>
+        <IconSuccess class="icon-bg"/>
         <div> Successful</div>
       </div>
       <div v-if="isSuccess" slot="body">
@@ -39,6 +44,8 @@ import OrderItem from '@/components/OrderItem.vue';
 import Modal from '@/components/Modal.vue';
 import IconSuccess from '@/icons/succes.svg';
 import IconError from '@/icons/error.svg';
+import IconLeftArrow from '@/icons/left-arrow.svg';
+import IconCheckout from '@/icons/on-cart.svg';
 import axios from 'axios';
 
 export default {
@@ -48,6 +55,8 @@ export default {
     Modal,
     IconSuccess,
     IconError,
+    IconLeftArrow,
+    IconCheckout,
   },
   data() {
     return {
@@ -125,6 +134,9 @@ export default {
     background-color: #fff;
     //min-width: 840px;
     .order-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
       border: 1px solid rgba($borderColor, 0.8);
       border-radius: 3px;
       padding: 10px;
@@ -138,6 +150,17 @@ export default {
       background-color: #ea6e35;
       color: white;
       border-color: #ea6e35;
+    }
+
+    @media (max-width: $tablet) {
+      font-size: 12px;
+      .icon-sm{
+        margin: 0;
+      }
+      .mobile-none{
+        display: none;
+      }
+
     }
 
   }
