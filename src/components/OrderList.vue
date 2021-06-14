@@ -20,20 +20,14 @@
       <div>Total Price : {{ getTotalPrice }} TRY</div>
     </div>
     <modal v-if="showModal" @close="showModal = false">
-      <div v-if="isError" class="modal-item-container" slot="header">
-        <IconError class="icon-bg"/>
-        <div> Error</div>
-      </div>
-      <div v-if="isError" slot="body">
-        <div> {{ error.message }}</div>
-      </div>
-      <div v-if="isSuccess" class="modal-item-container" slot="header">
-        <IconSuccess class="icon-bg"/>
-        <div> Successful</div>
-      </div>
-      <div v-if="isSuccess" slot="body">
-        Your order have been received
-      </div>
+        <div class="modal-item-container" slot="header">
+          <IconError v-if="isError" class="icon-bg"/>
+          <IconSuccess v-if="isSuccess" class="icon-bg"/>
+          <div> {{ modalData.status.toUpperCase() }} </div>
+        </div>
+        <div slot="body">
+          <div> {{ modalData.message }}</div>
+        </div>
     </modal>
   </div>
 </template>
@@ -46,7 +40,7 @@ import IconSuccess from '@/icons/succes.svg';
 import IconError from '@/icons/error.svg';
 import IconLeftArrow from '@/icons/left-arrow.svg';
 import IconCheckout from '@/icons/on-cart.svg';
-import axios from 'axios';
+import axios from '@/api/axios';
 
 export default {
   name: 'OrderList',
@@ -62,7 +56,7 @@ export default {
     return {
       isError: false,
       isSuccess: false,
-      error: {},
+      modalData: {},
       showModal: false,
       modalType: '',
     };
@@ -83,24 +77,26 @@ export default {
     goBack() {
       this.$router.push({ name: 'Listing' });
     },
-    placeOrder() {
+    async placeOrder() {
       const orderArray = this.orderItems.map((item) => ({
         id: item.id,
         amount: item.quantity,
       }));
-      axios.post('https://nonchalant-fang.glitch.me/order', orderArray)
-        .then(() => {
+      try {
+        const response = await axios.placeOrder(orderArray);
+        if (response && response.status === 200) {
           this.isSuccess = true;
           this.showModal = true;
           this.removeAllItems();
-        })
-        .catch((err) => {
-          if (err.response) {
-            this.error = err.response.data;
-            this.showModal = true;
-          }
+          this.modalData = response.data;
+        }
+      } catch (err) {
+        if (err.response.status === 404) {
           this.isError = true;
-        });
+          this.modalData = err?.response?.data;
+          this.showModal = true;
+        }
+      }
     },
   },
 
@@ -154,10 +150,10 @@ export default {
 
     @media (max-width: $tablet) {
       font-size: 12px;
-      .icon-sm{
+      .icon-sm {
         margin: 0;
       }
-      .mobile-none{
+      .mobile-none {
         display: none;
       }
 

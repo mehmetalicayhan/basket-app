@@ -12,8 +12,9 @@
 </template>
 
 <script>
-import axios from 'axios';
+// import axios from 'axios';
 import LoadingSkeleton from '@/components/LoadingSkeleton.vue';
+import axios from '@/api/axios';
 import ListItem from './ListItem.vue';
 
 export default {
@@ -29,12 +30,12 @@ export default {
     ListItem,
   },
 
-  created() {
-    axios.get('https://nonchalant-fang.glitch.me/listing')
-      .then((res) => {
-        this.products = res.data;
-        this.isLoading = true;
-      });
+  async created() {
+    const response = await axios.getProducts();
+    if (response) {
+      this.products = response.data;
+      this.isLoading = true;
+    }
   },
 };
 </script>
@@ -51,12 +52,14 @@ export default {
     grid-template-columns: 1fr 1fr;
 
   }
-  .list-items{
+
+  .list-items {
     margin: 20px;
-    border: 1px solid rgba($borderColor,0.3);
+    border: 1px solid rgba($borderColor, 0.3);
     box-shadow: 0 4px 8px 0 rgba($borderColor, 0.2), 0 6px 20px 0 rgba($borderColor, 0.19);
 
   }
+
   @media (min-width: $desktop) {
     grid-template-columns: 1fr 1fr 1fr;
 
