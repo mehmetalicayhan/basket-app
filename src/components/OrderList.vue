@@ -10,6 +10,8 @@
         <IconLeftArrow class="icon-sm"/>
         <div class="mobile-none">Continue to Shopping</div>
       </button>
+      <div>Total Price : {{ getTotalPrice }} TRY</div>
+
       <button :disabled="getOrderCount===0"
               class="order-button colored"
               @click.prevent="placeOrder"
@@ -17,7 +19,6 @@
         <IconCheckout class="icon-sm"/>
         <div class="mobile-none">Place Order</div>
       </button>
-      <div>Total Price : {{ getTotalPrice }} TRY</div>
     </div>
     <modal v-if="showModal" @close="showModal = false">
         <div class="modal-item-container" slot="header">
@@ -125,8 +126,6 @@ export default {
     border: 1px solid rgba($borderColor, 0.3);
     border-top: none;
     box-shadow: 0 -5px 5px -5px $borderColor;
-    //position: fixed;
-    //bottom: 0;
     background-color: #fff;
     //min-width: 840px;
     .order-button {
@@ -137,6 +136,9 @@ export default {
       border-radius: 3px;
       padding: 10px;
 
+      &:hover{
+        opacity: 0.5;
+      }
       &:disabled {
         opacity: 0.5;
       }
@@ -149,6 +151,13 @@ export default {
     }
 
     @media (max-width: $tablet) {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      justify-content: space-around;
+      padding: 10px;
+      right: 0;
+      left: 0;
       font-size: 12px;
       .icon-sm {
         margin: 0;
