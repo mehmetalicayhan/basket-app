@@ -13,7 +13,7 @@
 
 <script>
 import LoadingSkeleton from '@/components/LoadingSkeleton.vue';
-import axios from '@/api/axios';
+import basketService from '@/api/basket-service';
 import ListItem from './ListItem.vue';
 
 export default {
@@ -30,7 +30,7 @@ export default {
   },
 
   async created() {
-    const response = await axios.getProducts();
+    const response = await basketService.getProducts();
     if (response) {
       this.products = response.data;
       this.isLoading = true;

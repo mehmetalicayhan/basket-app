@@ -41,7 +41,7 @@ import IconSuccess from '@/icons/succes.svg';
 import IconError from '@/icons/error.svg';
 import IconLeftArrow from '@/icons/left-arrow.svg';
 import IconCheckout from '@/icons/on-cart.svg';
-import axios from '@/api/axios';
+import basketService from '@/api/basket-service';
 
 export default {
   name: 'OrderList',
@@ -84,7 +84,7 @@ export default {
         amount: item.quantity,
       }));
       try {
-        const response = await axios.placeOrder(orderArray);
+        const response = await basketService.placeOrder(orderArray);
         if (response && response.status === 200) {
           this.isSuccess = true;
           this.showModal = true;
