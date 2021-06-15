@@ -1,12 +1,14 @@
 <template>
-  <div class="list-container">
-    <template v-if="!isLoading">
-      <div class="list-items" v-for="index in 6" :key="index">
-        <loading-skeleton/>
+  <div>
+    <div class="list-container">
+      <template v-if="!isLoading">
+        <div class="list-items" v-for="index in 6" :key="index">
+          <loading-skeleton/>
+        </div>
+      </template>
+      <div class="list-items" v-for="(product,index) in products" :key="index+product.name">
+        <list-item class="list-item" :product="product"/>
       </div>
-    </template>
-    <div class="list-items" v-for="(product,index) in products" :key="index+product.name">
-      <list-item class="list-item" :product="product"/>
     </div>
     <div class="bottom-bar">
       <button @click="goToBasket" class="go-to-basket-button">
@@ -85,8 +87,6 @@ export default {
   border: 1px solid rgba($borderColor, 0.3);
   box-shadow: 0 -5px 5px -5px $borderColor;
   background-color: #fff;
-  grid-column-start: 1;
-  grid-column-end: 4;
 
   .go-to-basket-button {
     display: flex;
@@ -104,7 +104,7 @@ export default {
       opacity: 0.5;
     }
 
-    .icon-sm{
+    .icon-sm {
       margin-right: 0;
       margin-left: 5px;
     }
