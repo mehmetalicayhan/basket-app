@@ -1,11 +1,28 @@
-# basket-app
+# Basket App
 
-## Project setup
+A basket app for listing products and create orders 
+
+- Mobile compatibility
+- User friendly UI
+- SCSS/SASS preprocessors for styling
+- Vuex for client side state management
+- Unit tests with jest
+
+### Project setup
+1. Clone project from https://github.com/mehmetalicayhan/basket-app.git
+```
+git clone https://github.com/mehmetalicayhan/basket-app.git
+```
+2. Go to project directory
+```
+cd basket-app
+```
+3. Install dependencies
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### For starting application on browser
 ```
 npm run serve
 ```
@@ -20,15 +37,11 @@ npm run build
 npm run test:unit
 ```
 
-### Run your end-to-end tests
-```
-npm run test:e2e
-```
+### Deploy
+- This app deployed via vercel 
+- You can view this app from [Live demo](https://basket-app.vercel.app/) link
 
-### Lints and fixes files
-```
-npm run lint
-```
+### Screenshots
+![img](https://i.hizliresim.com/99mmtl6.png)
+![img](https://i.hizliresim.com/9y556on.png)
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
