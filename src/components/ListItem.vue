@@ -1,10 +1,16 @@
 <template>
   <div class="item-container">
-    <div class="self-center"><img width="60" height="60" :src="product.image" alt=""></div>
-    <div class="self-center">{{ product.name }}</div>
+    <div class="self-center">
+      <img class="item-image" width="60" height="60" :src="product.image" alt=""></div>
+    <div class="self-center item-name">{{ product.name }}</div>
     <div class="item-footer">
-      <div class="item-price">{{ parseFloat(product.price).toFixed(2) }} TRY</div>
+      <div class="item-price">{{
+          parseFloat(product.price)
+            .toFixed(2)
+        }} TRY
+      </div>
       <button
+        class="add-to-basket-button"
         v-if="!orderItems.find((item) => item.id === this.product.id)"
         @click="addToBasket">
         <IconAddCart class="icon-sm"/>
