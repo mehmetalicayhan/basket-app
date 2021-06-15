@@ -8,18 +8,21 @@
             :disabled="orderItem.quantity === 1"
             @click="decrementItemQuantity" class="decrement">-
           </button>
-          <input type="number" v-model="orderItem.quantity"/>
+          <label>
+            <input :disabled="true" type="number" v-model="orderItem.quantity"/>
+          </label>
           <button @click="incrementItemQuantity" class="increment">+</button>
         </div>
       </div>
       <div class="order-item-right-side">
         <p class="order-item-name">{{ orderItem.name }}</p>
         <p class="order-item-price">{{
-            parseFloat(orderItem.price*orderItem.quantity)
+            parseFloat(orderItem.price * orderItem.quantity)
               .toFixed(2)
           }} TRY</p>
         <button @click="removeFromBasket"
                 class="self-end remove-item-button">
+          <div class="button-text">Remove Item</div>
           <IconRemoveFromCart class="icon-md"/>
         </button>
       </div>
@@ -97,30 +100,35 @@ export default {
         align-items: center;
         margin-top: 10px;
 
-        input {
-          border: 1px solid rgba($borderColor, 0.8);
-          width: 30px;
-          border-radius: 5px;
-          padding: 5px;
-          text-align: center;
+        label {
+          input {
+            border: 1px solid rgba($borderColor, 0.8);
+            width: 30px;
+            border-radius: 5px;
+            padding: 5px;
+            text-align: center;
 
-          &:focus {
-            outline: none;
-            border-color: rgba($borderColor, 1);
-          }
+            &:focus {
+              outline: none;
+            }
 
-          &::-webkit-inner-spin-button {
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
-            margin: 0;
-          }
+            &:disabled {
+              background-color: #fff;
+            }
 
-          &::-webkit-outer-spin-button {
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
-            margin: 0;
+            &::-webkit-inner-spin-button {
+              -webkit-appearance: none;
+              -moz-appearance: none;
+              appearance: none;
+              margin: 0;
+            }
+
+            &::-webkit-outer-spin-button {
+              -webkit-appearance: none;
+              -moz-appearance: none;
+              appearance: none;
+              margin: 0;
+            }
           }
         }
 
@@ -171,11 +179,22 @@ export default {
       }
 
       .remove-item-button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         border: 1px solid $removeRed;
         border-radius: 4px;
         padding: 8px;
         color: $removeRed;
-        &:hover{
+
+        .button-text {
+          margin-right: 4px;
+          @media(max-width: $tablet) {
+            display: none;
+          }
+        }
+
+        &:hover {
           background-color: $removeRed;
           color: #fff;
         }

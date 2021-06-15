@@ -3,17 +3,17 @@
     <p class="order-length">MY CART ({{ getOrderCount }})</p>
 
     <div v-for="(item,index) in getOrderItems" :key="index">
-      <order-item :order-item="item"/>
+      <order-item class="order-item" :order-item="item"/>
     </div>
     <div class="button-container">
-      <button @click="goBack" class="order-button">
+      <button @click="goBack" class="order-button go-back">
         <IconLeftArrow class="icon-sm"/>
         <div class="mobile-none">Continue to Shopping</div>
       </button>
       <div class="total-price">Total Price : {{ getTotalPrice }} TRY</div>
 
       <button :disabled="getOrderCount===0"
-              class="order-button colored"
+              class="order-button colored place-order-button"
               @click.prevent="placeOrder"
       >
         <IconCheckout class="icon-sm"/>
