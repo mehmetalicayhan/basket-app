@@ -127,7 +127,6 @@ export default {
     border-top: none;
     box-shadow: 0 -5px 5px -5px $borderColor;
     background-color: #fff;
-    //min-width: 840px;
     .order-button {
       display: flex;
       align-items: center;
