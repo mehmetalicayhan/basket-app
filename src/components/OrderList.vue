@@ -10,7 +10,7 @@
         <IconLeftArrow class="icon-sm"/>
         <div class="mobile-none">Continue to Shopping</div>
       </button>
-      <div>Total Price : {{ getTotalPrice }} TRY</div>
+      <div class="total-price">Total Price : {{ getTotalPrice }} TRY</div>
 
       <button :disabled="getOrderCount===0"
               class="order-button colored"
