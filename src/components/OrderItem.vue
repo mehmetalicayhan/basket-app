@@ -2,14 +2,17 @@
   <div class="order-container">
     <div class="order-container-inner">
       <div class="order-item-left-side">
-        <img :src="orderItem.image" width="92" height="92" alt="orderItem">
+        <img class="order-image" :src="orderItem.image" width="92" height="92" alt="orderItem">
         <div class="order-item-quantity">
           <button
             :disabled="orderItem.quantity === 1"
             @click="decrementItemQuantity" class="decrement">-
           </button>
           <label>
-            <input :disabled="true" type="number" v-model="orderItem.quantity"/>
+            <input :disabled="true"
+                   class="quantity-input"
+                   type="number"
+                   v-model="orderItem.quantity"/>
           </label>
           <button @click="incrementItemQuantity" class="increment">+</button>
         </div>
